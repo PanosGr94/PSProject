@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
 
         if(mysqli_num_rows($results)==1){
             $_SESSION['login_user']=$rows['name']; // Initializing Session
-            header("location: main.php"); // Redirecting To Other Page
+            header("location: index.php"); // Redirecting To Other Page
             $message = "User ".$_SESSION['login_user']." has been logged in!";
         } else {
             $message = "Username or Password is invalid in login.php , ".$rows[0]." , ".$email." , ".$pass;
