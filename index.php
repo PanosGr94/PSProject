@@ -5,11 +5,10 @@
  *
 */
 error_reporting(0);
-
 @include("includes/connect.php");
-session_start();
 @include ("includes/login.php");
-@include ("includes/register.php");
+session_start();
+
 //@include ("includes/session.php");
 //@include ("includes/logout.php");
 
@@ -20,8 +19,6 @@ session_start();
   }
 */
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -38,7 +35,9 @@ session_start();
     <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
+    <?php if(isset($_SESSION['message_user_login'])){ ?><div class="alert alert-success" role="alert"> <?php echo $_SESSION['message_user_login']; ?> </div><?php } ?>
+
+    <nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -52,52 +51,9 @@ session_start();
 				<li ><a href="#">Book Event</a></li>
 				<li ><a href="#">Contact</a></li>
 
-<!--TODO-Panos : Added li for login -->
-                <li>
-                    <div class="dropdown" >
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!--TODO Panos: CHECK FOR SESSION NAME EXISTANCE-->
-                            <?php if(isset($_SESSION['login_user'])) echo '<p>'.$_SESSION['login_user'].'</p>'; else echo '<i class="fa fa-user"></i>'?>
-
-                        </button>
-                        <div class="dropdown-menu  dropdown-menu-right" style="padding:20px;">
-                            <form class="px-4 py-3">
-                                <div class="form-group">
-                                    <label for="userEmail">Email address</label>
-                                    <input type="email" name="email" id="userEmail" placeholder="email@example.com">
-                                </div>
-                                <div class="form-group">
-                                    <label for="userPassword">Password</label>
-                                    <input type="password" name="pass" id="userPassword" placeholder="Password">
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn-primary btn btn-sm">Sign in</button>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button class="btn btn-secondary btn-sm">Sign up</button>
-                                    </div>
-                                </div>
-
-
-                            </form>
-
-                            <div class="dropdown-divider" style="margin:25px;"></div>
-<!--
-Show this if user is logged in -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn-danger btn btn-sm">Logout</button>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
+                <!--TODO-Panos : Added li for login -->
+                <li><!--TODO Panos: CHECK FOR SESSION NAME EXISTANCE-->
+                    <?php if(isset($_SESSION['login_html'])) echo $_SESSION['login_html']; else echo $login_html;?>
                 </li>
 
 
@@ -141,56 +97,7 @@ Show this if user is logged in -->
 		</a>
 	</div><!-- End Slider -->
 
-<!--TODO Panos: div to show informative message & more below this by Panos -->
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="text-primary"><?php $message ?></h3>
-        </div>
-    </div>
 
-    <div class="modal fade" id="logInModal" >
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">MODAL FORM FOR SIGN UP</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <form id="loginForm" action="index.php" method="post">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <label>Email</label>
-                                        <input type="mail" name="email" id="userEmail" placeholder="email@example.com">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <label>Password</label>
-                                        <input type="password" name="pass" id="userPassword" placeholder="Password">
-                                    </div>
-
-                                </div>
-                                <a href="#" class="col-md-offset-2" onClick="">No account?</a>
-
-                                <input type="submit" class="btn btn-primary" name="login" value="Log In">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </form>
-                        </div>
-
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

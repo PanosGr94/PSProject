@@ -3,16 +3,16 @@
         This scenario 
 -->
 <?php
-//@include_once("connect.php");
+@include_once("connect.php");
 
 $query = "SELECT MAX(user_id) AS count FROM user";
 $results = mysqli_query($dbc, $query);
 $rows = mysqli_fetch_assoc($results);
-$message = '';
+$message_register = '';
 
 if(isset($_POST['register'])){
     if(empty($_POST['name'])||empty($_POST['pass'])||empty($_POST['email'])){
-        $message = 'Please fill in the required fields';
+        $message_register = 'Please fill in the required fields';
     }else{
         $username = mysqli_real_escape_string($dbc, trim($_POST['name']));
         $password = mysqli_real_escape_string($dbc, trim($_POST['pass']));
@@ -25,14 +25,11 @@ if(isset($_POST['register'])){
 
         if(mysqli_affected_rows($dbc)==1){
             $_POST = array(); //Clear out the $_Post table
-            header("location:main.php");
+            header("location:index.php");
             $_SESSION['login_user']=$username; // Initializing Session
-
-            $message = "You have been registered successfully";
-            echo $message;
-
+            $_SESSION['message_user_login']="You have been registered successfully"; // Initializing Session
         }else{
-            $message = "User could not be added. Please try again later";
+            $message_register = "User could not be added. Please try again later";
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-//@include_once ("connect.php");
+@include_once ("connect.php");
 
 session_start();// Starting Session
 // Storing Session
@@ -10,6 +10,6 @@ $row = mysqli_fetch_assoc($ses_sql);
 $login_session =$row['name'];
 if(!isset($login_session)){
     mysqli_close($dbc); // Closing Connection
-    header('Location: main.php'); // Redirecting To Home Page
+    header('Location: index.php'); // Redirecting To Home Page
 }
 ?>
